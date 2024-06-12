@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Prowler checks
         run: |
-            prowler aws --compliance cis_3.0_aws --excluded-services ec2 rds
+            prowler aws --compliance cis_3.0_aws --excluded-services ec2 rds --verbose
 
       - name: Message
         run: |
