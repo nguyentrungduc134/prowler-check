@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch: {}
+
+env:
+  applicationfolder: spring-boot-hello-world-example
+  AWS_REGION: us-west-1
+
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
+          role-session-name: GitHub-Action-Role
+      - name: Install Prowler
+        run: |
+            pip install prowler
+            prowler -v            
+
+      - name: Run Prowler checks
+        run: |
+            prowler aws --compliance cis_3.0_aws --excluded-services ec2 rds 
+ 
+      - name: Message
+        run: |
+            echo "Prowler run completed"            
