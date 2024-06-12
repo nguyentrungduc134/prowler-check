@@ -4,8 +4,9 @@ on:
   workflow_dispatch: {}
 
 env:
-  applicationfolder: spring-boot-hello-world-example
+  applicationfolder: core
   AWS_REGION: us-west-1
+
 
 
 jobs:
@@ -24,15 +25,9 @@ jobs:
           role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
           role-session-name: GitHub-Action-Role
           aws-region: ${{ env.AWS_REGION }}
-      - name: Install Prowler
-        run: |
-            pip install prowler
-            prowler -v            
 
-      - name: Run Prowler checks
-        run: |
-            prowler aws --compliance cis_3.0_aws --excluded-services ec2 rds 
- 
-      - name: Message
-        run: |
-            echo "Prowler run completed"            
+      - run: npm install
+      - run: npm run production           
+      - run: tar -czf /tmp/core.tar.gz .   
+      - name: Upload Artifact to s3
+        run: aws s3 cp /tmp/core.tar.gz s3://${{ env.S3BUCKET }}/            
