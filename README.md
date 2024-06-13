@@ -10,7 +10,7 @@ This GitHub Actions workflow is designed to build and deploy applications while 
 
 - A GitHub repository with GitHub Actions enabled.
 - A `config.json` file in the root directory of your repository containing the matrix data.
-- Properly configured IAM role (`IAMROLE_GITHUB`) with the necessary permissions for AWS actions.
+- Properly configured IAM role  with the necessary permissions for AWS actions.
 
 ## Workflow Explanation
 
@@ -35,7 +35,7 @@ on:
 
 env:
   applicationfolder: core
-  AWS_REGION: us-east-1
+  AWS_REGION: us-east-2
 
 jobs:
   configure:
@@ -60,14 +60,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout Repository
-
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
-          aws-region: ${{ env.AWS_REGION }}
 
       - name: Install Prowler
         run: |
