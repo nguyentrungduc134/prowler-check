@@ -21,9 +21,11 @@ jobs:
        id: set-matrix
        run: echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
   build:
-  
+    needs: configure
     name: Build and Package
     runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}    
     permissions:
       id-token: write
       contents: read
@@ -43,7 +45,7 @@ jobs:
 
       - name: Run Prowler checks
         run: |
-            prowler aws --verbose
+            prowler aws --compliance ${{ matrix.compliance }} --excluded-services ${{ matrix.exclude }}
 
       - name: Message
         run: |
