@@ -1,7 +1,8 @@
 {
     "include": [
     {
-        "name": "Mario second"
+        "name": "Mario second",
+        "id": "test"
     },
     {
         "name": "Luigi"
