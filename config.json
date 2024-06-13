@@ -1,11 +1,12 @@
 {
     "include": [
     {
-        "name": "Mario second",
-        "id": "test"
+        "compliance": "soc2_aws",
+        "exclude": "ec2 rds"
     },
     {
-        "name": "Luigi"
+        "compliance": "cis_3.0_aws",
+        "exclude": "ec2 rds"
     }
     ]
 }
