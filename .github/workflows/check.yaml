@@ -10,7 +10,18 @@ env:
 
 
 jobs:
+  configure:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+     - name: Checkout to repository
+       uses: actions/checkout@v3
+     - name: Set matrix data
+       id: set-matrix
+       run: echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
   build:
+  
     name: Build and Package
     runs-on: ubuntu-latest
     permissions:
