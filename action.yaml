@@ -1,0 +1,40 @@
+name: Compliance check
+
+on:
+  workflow_dispatch: {}
+
+
+
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+     - name: Set matrix data
+       id: set-matrix
+       run: echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
+  Check:
+    needs: configure
+    name: Build and Package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}    
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Install Prowler
+        run: |
+            pip install prowler
+            prowler -v
+
+      - name: Run Prowler checks
+        run: |
+            prowler aws --compliance ${{ matrix.compliance }} --excluded-services ${{ matrix.exclude }}
+
+      - name: Message
+        run: |
+            echo "Prowler run completed"
+
