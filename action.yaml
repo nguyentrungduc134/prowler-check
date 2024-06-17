@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ inputs.config-file }}"
+    - run: cat "${{ inputs.config-file }}"
       shell: bash
     - name: Install Prowler
       run: |
