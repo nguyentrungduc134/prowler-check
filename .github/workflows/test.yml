@@ -25,10 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJson(needs.configure.outputs.matrix) }}    
-    permissions:
-      id-token: write
-      contents: read
-    steps:
+     steps:
       - uses: actions/checkout@v3
         name: Checkout Repository
       - name: Install Prowler
