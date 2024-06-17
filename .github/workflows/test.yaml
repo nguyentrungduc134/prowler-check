@@ -1,0 +1,21 @@
+name: Compliance check
+
+on:
+  workflow_call:  
+    inputs:
+      config-path:
+        required: true
+        description: "My image tag"
+        default: "11"
+env:
+  applicationfolder: core
+
+
+
+jobs:
+  configure:
+      - name: Print the input name to STDOUT
+        uses: actions/checkout@v3      
+        run: echo $1 The username is 
+        args:
+            - ${{ inputs.config-path }}
