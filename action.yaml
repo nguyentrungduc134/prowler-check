@@ -18,6 +18,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
      - name: Set matrix data
+       uses: actions/labeler@v4
        id: set-matrix
        run: echo "matrix=$(jq -c . < ${{ configuration-path }})" >> $GITHUB_OUTPUT
        with:
