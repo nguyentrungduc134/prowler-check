@@ -12,3 +12,9 @@ runs:
   steps:
     - run: echo "${{ inputs.config-file }}"
       shell: bash
+    - name: Install Prowler
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+        pip3 install prowler
+      shell: bash
