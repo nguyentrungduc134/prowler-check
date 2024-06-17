@@ -14,4 +14,6 @@ env:
 jobs:
   configure:
       - name: Print the input name to STDOUT
-        run: echo The username is ${{ inputs.config-path }}
+        run: echo $1 The username is 
+        args:
+            - ${{ inputs.config-path }}
