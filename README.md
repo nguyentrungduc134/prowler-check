@@ -116,4 +116,3 @@ For more information on GitHub Actions and using matrices, visit the [GitHub Act
 
 ---
 
-This README provides a clear and concise explanation of how the workflow operates, the structure of the JSON file, and how to set up and run the workflow in a GitHub repository.
