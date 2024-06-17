@@ -31,12 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Checkout Repository
-
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
-          aws-region: ${{ env.AWS_REGION }}
       - name: Install Prowler
         run: |
             pip install prowler
