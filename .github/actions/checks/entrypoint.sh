@@ -1,14 +1,14 @@
 #!/bin/sh -l
 
-AWS_REGION=
-CONFIG_FILE=
+AWS_REGION=$1
+CONFIG_FILE=$2
 
 # Read config file
-MATRIX=
+MATRIX=$(jq -c . < $CONFIG_FILE)
 
 # Extract compliance and exclude parameters from matrix
-COMPLIANCE=
-EXCLUDE=
+COMPLIANCE=$(echo $MATRIX | jq -r '.compliance')
+EXCLUDE=$(echo $MATRIX | jq -r '.exclude')
 
 # Run Prowler
-prowler -r  -c  --excluded-services 
+prowler -r $AWS_REGION -compliance $COMPLIANCE --excluded-services $EXCLUDE
