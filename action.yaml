@@ -19,7 +19,7 @@ jobs:
     steps:
      - name: Set matrix data
        id: set-matrix
-       run: echo "matrix=$(jq -c . < ${{ configuration-path })" >> $GITHUB_OUTPUT
+       run: echo "matrix=$(jq -c . < ${{ configuration-path }})" >> $GITHUB_OUTPUT
        with:
          configuration-path: ${{ inputs.config-path }}
   Check:
