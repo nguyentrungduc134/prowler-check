@@ -17,4 +17,4 @@ jobs:
       - name: Print the input name to STDOUT
         run: echo $1 The username is 
         args:
-            - ${{ github.event.inputs.config-path }}
+            - ${{ inputs.config-path }}
