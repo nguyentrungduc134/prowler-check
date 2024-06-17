@@ -3,6 +3,9 @@ name: Compliance check
 on:
   workflow_dispatch: {}
 
+env:
+  applicationfolder: core
+  AWS_REGION: us-east-2
 
 
 
