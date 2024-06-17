@@ -1,7 +1,7 @@
 name: Compliance check
 
 on:
-  workflow_dispatch: {}
+  workflow_call:  
 
 env:
   applicationfolder: core
