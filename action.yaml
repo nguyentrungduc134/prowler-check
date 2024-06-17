@@ -2,10 +2,12 @@ name: Compliance check
 
 on:
   workflow_call:  
-
+    inputs:
+      config-path:
+        required: true
+        type: string
 env:
   applicationfolder: core
-  AWS_REGION: us-east-2
 
 
 
@@ -17,7 +19,7 @@ jobs:
     steps:
      - name: Set matrix data
        id: set-matrix
-       run: echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
+       run: echo "matrix=$(jq -c . < ${{ inputs.config-path }})" >> $GITHUB_OUTPUT
   Check:
     needs: configure
     name: Build and Package
