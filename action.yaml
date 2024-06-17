@@ -19,7 +19,7 @@ jobs:
     steps:
      - name: Set matrix data
        id: set-matrix
-       run: echo "matrix=hbj" >> $GITHUB_OUTPUT
+       run: echo -n "::set-output name=output-matrix::{\"include\": [{\"key\": \"value1\"}, {\"key\": \"value2\"}]}"
   Check:
     needs: configure
     name: Build and Package
