@@ -13,33 +13,5 @@ env:
 
 jobs:
   configure:
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-     - name: Set matrix data
-       uses: actions/labeler@v4
-       id: set-matrix
-       run: echo "matrix=$(jq -c . < ${{ inputs.config-path }})" >> $GITHUB_OUTPUT
-  Check:
-    needs: configure
-    name: Build and Package
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJson(needs.configure.outputs.matrix) }}    
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - name: Install Prowler
-        run: |
-            pip install prowler
-            prowler -v
-
-      - name: Run Prowler checks
-        run: |
-            prowler aws --compliance ${{ matrix.compliance }} --excluded-services ${{ matrix.exclude }}
-
-      - name: Message
-        run: |
-            echo "Prowler run completed"
-
+      - name: Print the input name to STDOUT
+        run: echo The username is ${{ inputs.config-path }}
