@@ -1,0 +1,33 @@
+name: "Prowler Check"
+description: "Run Prowler compliance checks"
+inputs:
+  aws-region:
+    description: "AWS region"
+    required: true
+  config-file:
+    description: "Path to the configuration file"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.aws-region }}
+    - ${{ inputs.config-file }}
+
+EOF
+-bash: name: "Prowler Check"
+description: "Run Prowler compliance checks"
+inputs:
+  aws-region:
+    description: "AWS region"
+    required: true
+  config-file:
+    description: "Path to the configuration file"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.aws-region }}
+    - ${{ inputs.config-file }}
+
