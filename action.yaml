@@ -5,7 +5,8 @@ on:
     inputs:
       config-path:
         required: true
-        type: string
+        description: "My image tag"
+        default: "11"
 env:
   applicationfolder: core
 
