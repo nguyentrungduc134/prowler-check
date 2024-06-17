@@ -7,6 +7,7 @@ on:
         required: true
         description: "My image tag"
         default: "11"
+        type: string
 env:
   applicationfolder: core
 
@@ -14,8 +15,8 @@ env:
 
 jobs:
   configure:
-      - name: Print the input name to STDOUT
-        uses: actions/checkout@v3      
-        run: echo $1 The username is 
-        args:
-            - ${{ inputs.config-path }}
+     runs-on: ubuntu-latest
+     steps:
+      - name: Print the input name to STDOUT  
+        run: echo ${{ inputs.config-path }} The username is 
+
