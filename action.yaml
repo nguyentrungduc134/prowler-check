@@ -20,7 +20,7 @@ jobs:
      - name: Set matrix data
        uses: actions/labeler@v4
        id: set-matrix
-       run: echo "matrix=$(jq -c . < ${{ inputs.config-file }})" >> $GITHUB_OUTPUT
+       run: echo "matrix=$(jq -c . < ${{ inputs.config-path }})" >> $GITHUB_OUTPUT
   Check:
     needs: configure
     name: Build and Package
