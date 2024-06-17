@@ -19,7 +19,9 @@ jobs:
     steps:
      - name: Set matrix data
        id: set-matrix
-       run: echo -n "::set-output name=matrix::{\"include\": [{\"key\": \"value1\"}, {\"key\": \"value2\"}]}"
+       run: echo "matrix=$(jq -c . < ./config.json)" >> $GITHUB_OUTPUT
+       with:
+         configuration-path: ${{ inputs.config-path }}
   Check:
     needs: configure
     name: Build and Package
